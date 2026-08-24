@@ -177,10 +177,7 @@ include 'components/wishlist_cart.php';
 </section>
 
 <?php
-   // Only show this section if at least one product actually has a discount set.
-   // Wrapped defensively: older databases created before the discount/category/
-   // stock/rating columns existed won't have this column yet, and this section
-   // simply won't render for them instead of crashing the whole page.
+   
    $show_deals = false;
    try {
       $select_deals = $conn->prepare("SELECT * FROM `products` WHERE discount > 0 LIMIT 6");
