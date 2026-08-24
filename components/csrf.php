@@ -1,6 +1,6 @@
 <?php
 // Simple CSRF protection helpers.
-// Requires session_start() to have been called before these are used.
+
 
 // Returns the current CSRF token, generating one if it doesn't exist yet.
 function csrf_token() {
