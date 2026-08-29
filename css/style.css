@@ -437,12 +437,6 @@ section{
    transform: translateY(-.4rem);
 }
 
-.category .swiper-slide{
-   display: flex;
-   align-items: stretch;
-   justify-content: center;
-}
-
 .category .swiper-wrapper{
    padding-bottom: 2rem;
 }
@@ -506,8 +500,7 @@ section{
    align-items: flex-start;
 }
 
-.home-products .swiper-slide,
-.category .swiper-slide{
+.home-products .swiper-slide{
    height: auto !important;
    align-self: flex-start;
    display: flex;
@@ -527,7 +520,6 @@ section{
    background-color: var(--white);
    margin-bottom: 2rem;
    border-radius: .5rem;
-   cursor: pointer;
 }
 
 .home-products .slide .name{
@@ -767,7 +759,6 @@ section{
    background-color: var(--white);
    margin-bottom: 2rem;
    border-radius: .5rem;
-   cursor: pointer;
 }
 
 .products .box-container .box .fa-heart,
