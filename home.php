@@ -154,7 +154,9 @@ include 'components/wishlist_cart.php';
             <?= render_discount_badge($fetch_product['discount']); ?>
             <button class="fas fa-heart" type="submit" name="add_to_wishlist"></button>
             <a href="quick_view.php?pid=<?= htmlspecialchars($fetch_product['id'], ENT_QUOTES, 'UTF-8'); ?>" class="fas fa-eye"></a>
-            <img src="uploaded_img/<?= htmlspecialchars($fetch_product['image_01'], ENT_QUOTES, 'UTF-8'); ?>" alt="<?= htmlspecialchars($fetch_product['name']); ?>">
+            <a href="quick_view.php?pid=<?= $fetch_product['id']; ?>">
+               <img src="uploaded_img/<?= htmlspecialchars($fetch_product['image_01'], ENT_QUOTES, 'UTF-8'); ?>" alt="<?= htmlspecialchars($fetch_product['name']); ?>">
+            </a>
             <div class="name"><?= htmlspecialchars($fetch_product['name'], ENT_QUOTES, 'UTF-8'); ?></div>
             <?= render_stars($fetch_product['rating'], $fetch_product['rating_count']); ?>
             <?= render_stock_note($fetch_product['stock']); ?>
@@ -177,7 +179,10 @@ include 'components/wishlist_cart.php';
 </section>
 
 <?php
-   
+   // Only show this section if at least one product actually has a discount set.
+   // Wrapped defensively: older databases created before the discount/category/
+   // stock/rating columns existed won't have this column yet, and this section
+   // simply won't render for them instead of crashing the whole page.
    $show_deals = false;
    try {
       $select_deals = $conn->prepare("SELECT * FROM `products` WHERE discount > 0 LIMIT 6");
@@ -205,7 +210,9 @@ include 'components/wishlist_cart.php';
             <?= render_discount_badge($fetch_deal['discount']); ?>
             <button class="fas fa-heart" type="submit" name="add_to_wishlist"></button>
             <a href="quick_view.php?pid=<?= htmlspecialchars($fetch_deal['id'], ENT_QUOTES, 'UTF-8'); ?>" class="fas fa-eye"></a>
-            <img src="uploaded_img/<?= htmlspecialchars($fetch_deal['image_01'], ENT_QUOTES, 'UTF-8'); ?>" alt="<?= htmlspecialchars($fetch_deal['name'], ENT_QUOTES, 'UTF-8'); ?>">
+            <a href="quick_view.php?pid=<?= $fetch_deal['id']; ?>">
+               <img src="uploaded_img/<?= htmlspecialchars($fetch_deal['image_01'], ENT_QUOTES, 'UTF-8'); ?>" alt="<?= htmlspecialchars($fetch_deal['name'], ENT_QUOTES, 'UTF-8'); ?>">
+            </a>
             <div class="name"><?= htmlspecialchars($fetch_deal['name'], ENT_QUOTES, 'UTF-8'); ?></div>
             <?= render_stars($fetch_deal['rating'], $fetch_deal['rating_count']); ?>
             <?= render_stock_note($fetch_deal['stock']); ?>

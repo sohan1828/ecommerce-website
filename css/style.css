@@ -527,6 +527,7 @@ section{
    background-color: var(--white);
    margin-bottom: 2rem;
    border-radius: .5rem;
+   cursor: pointer;
 }
 
 .home-products .slide .name{
@@ -766,6 +767,7 @@ section{
    background-color: var(--white);
    margin-bottom: 2rem;
    border-radius: .5rem;
+   cursor: pointer;
 }
 
 .products .box-container .box .fa-heart,

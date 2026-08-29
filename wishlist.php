@@ -8,8 +8,8 @@ csrf_verify_or_die();
 if(isset($_SESSION['user_id'])){
    $user_id = $_SESSION['user_id'];
 }else{
-   $user_id = '';
    header('location:user_login.php');
+   exit;
 };
 
 include 'components/wishlist_cart.php';

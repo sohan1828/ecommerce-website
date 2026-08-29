@@ -66,7 +66,9 @@ include 'components/wishlist_cart.php';
       <?= render_discount_badge($fetch_product['discount']); ?>
       <button class="fas fa-heart" type="submit" name="add_to_wishlist"></button>
       <a href="quick_view.php?pid=<?= htmlspecialchars($fetch_product['id'], ENT_QUOTES, 'UTF-8'); ?>" class="fas fa-eye"></a>
-      <img src="uploaded_img/<?= htmlspecialchars($fetch_product['image_01'], ENT_QUOTES, 'UTF-8'); ?>" alt="<?= htmlspecialchars($fetch_product['name']); ?>">
+      <a href="quick_view.php?pid=<?= $fetch_product['id']; ?>">
+         <img src="uploaded_img/<?= htmlspecialchars($fetch_product['image_01'], ENT_QUOTES, 'UTF-8'); ?>" alt="<?= htmlspecialchars($fetch_product['name']); ?>">
+      </a>
       <div class="name"><?= htmlspecialchars($fetch_product['name'], ENT_QUOTES, 'UTF-8'); ?></div>
       <?= render_stars($fetch_product['rating'], $fetch_product['rating_count']); ?>
       <?= render_stock_note($fetch_product['stock']); ?>

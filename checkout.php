@@ -8,8 +8,8 @@ csrf_verify_or_die();
 if(isset($_SESSION['user_id'])){
    $user_id = $_SESSION['user_id'];
 }else{
-   $user_id = '';
    header('location:user_login.php');
+   exit;
 };
 
 if(isset($_POST['order'])){
@@ -24,13 +24,22 @@ if(isset($_POST['order'])){
    $method = trim($method);
    $address = 'flat no. '. $_POST['flat'] .', '. $_POST['street'] .', '. $_POST['city'] .', '. $_POST['state'] .', '. $_POST['country'] .' - '. $_POST['pin_code'];
    $address = trim($address);
-   $total_products = $_POST['total_products'];
-   $total_price = $_POST['total_price'];
 
-   $check_cart = $conn->prepare("SELECT * FROM `cart` WHERE user_id = ?");
-   $check_cart->execute([$user_id]);
+   // Never trust total_products/total_price from the client - those were
+   // just hidden form fields anyone could edit before submitting. Recompute
+   // both authoritatively from what's actually sitting in the user's cart.
+   $select_cart = $conn->prepare("SELECT * FROM `cart` WHERE user_id = ?");
+   $select_cart->execute([$user_id]);
 
-   if($check_cart->rowCount() > 0){
+   $total_price = 0;
+   $cart_items = [];
+   while($fetch_cart_item = $select_cart->fetch(PDO::FETCH_ASSOC)){
+      $cart_items[] = $fetch_cart_item['name'].' ('.$fetch_cart_item['price'].' x '.$fetch_cart_item['quantity'].')';
+      $total_price += ($fetch_cart_item['price'] * $fetch_cart_item['quantity']);
+   }
+   $total_products = implode(' - ', $cart_items);
+
+   if(count($cart_items) > 0){
 
       $insert_order = $conn->prepare("INSERT INTO `orders`(user_id, name, number, email, method, address, total_products, total_price) VALUES(?,?,?,?,?,?,?,?)");
       $insert_order->execute([$user_id, $name, $number, $email, $method, $address, $total_products, $total_price]);
@@ -92,8 +101,6 @@ if(isset($_POST['order'])){
             echo '<p class="empty">your cart is empty!</p>';
          }
       ?>
-         <input type="hidden" name="total_products" value="<?= $total_products; ?>">
-         <input type="hidden" name="total_price" value="<?= $grand_total; ?>">
          <div class="grand-total">grand total : <span>Rs.<?= $grand_total; ?>/-</span></div>
       </div>
 
