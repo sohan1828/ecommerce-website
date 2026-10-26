@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <defs>
+    <linearGradient id="gizmoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8b5cf6" />
+      <stop offset="50%" stop-color="#6366f1" />
+      <stop offset="100%" stop-color="#06b6d4" />
+    </linearGradient>
+  </defs>
+  <rect x="4" y="4" width="92" height="92" rx="26" fill="url(#gizmoGrad)" />
+  <rect x="5" y="5" width="90" height="90" rx="25" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2" />
+  <path d="M68 36C63.5 28.5 54.8 24 45 24C29.5 24 18 35.5 18 50C18 64.5 29.5 76 45 76C59 76 68.5 67 70 54H47V43H79C81 58 71.5 84 45 84C25 84 10 69 10 50C10 31 25 16 45 16C57.5 16 68.5 21.5 75 30L68 36Z" fill="#ffffff" />
+  <circle cx="73" cy="27" r="6" fill="#38bdf8" />
+  <path d="M73 24L75 27L78 29L75 31L73 34L71 31L68 29L71 27Z" fill="#ffffff" />
+</svg>
+
